@@ -1,0 +1,7 @@
+*.pyc
+token_github.txt
+.venv/
+.git/
+__pycache__/
+make_path.sh
+login.md
