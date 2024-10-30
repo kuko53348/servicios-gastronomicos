@@ -1,39 +1,40 @@
 import flet as ft
 
 from controls.app_screen_db import GLOBAL_VAR
-from builder import builder_screens
 from controls.views.nav_bar.nav_app_bar import nav_app_bar, nav_drawer_widget
 from controls.views.nav_bar.nav_bar_footer import botton_bar
-
-from builder.builder_screens import screen_view
 
 
 class got_to_screen():
     """
     EVENT CHANGE SCREENS
     """
-
     def __init__(self,
-                 to_screen='screen_name',
-                 style='ring',
-                 time_style=0.8,
-                 page="",
+                 page: object = object(),
                  rotation: bool = False,
+                 style: str = 'ring',
+                 time_style: float = 0.8,
+                 to_screen: str = 'screen_name',
                  ):
-        super().__init__()
+        # super().__init__()
 
         # GET ROTATION MODULE ACCEPT
-        self.rotation = rotation
         self.page = page
+        self.rotation = rotation
 
         # GET BY DEFOULD MAIN SCREEN FIRST
         self.widget_screen = GLOBAL_VAR(get_global_var=to_screen)
 
-        self.page.views[0].controls.clear()
-        self.page.views[0].controls.append(self.widget_screen(main_page=self.page))
+        # VIEWS IN MAIN PAGE
+        self.main_view = self.page.views[0]
 
-        self.page.views[0].appbar.visible = True
-        self.page.views[0].navigation_bar.visible = True
+        # CLEAR CONTROL VIEW TO ADD CURRENT SELECTED VIEW
+        self.main_view.controls.clear()
+        self.main_view.controls.append(self.widget_screen(main_page=self.page))
 
-        # GO DEFAULD ROOT PAGE
+        # SET VISIBLE APPBAR AND NAVIGATION BAR
+        self.main_view.appbar.visible = True
+        self.main_view.navigation_bar.visible = True
+
+        # GO BY DEFAULD ROOT PAGE
         self.page.go('/')

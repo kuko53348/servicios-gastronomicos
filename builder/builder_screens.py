@@ -1,32 +1,38 @@
 import flet as ft
-from controls.app_screen_db import GLOBAL_VAR
-
 
 class screen_view(ft.Container):
     """
-    SCREEN_VIEW:
+    :SCREEN_VIEW:
 
-    MODEL BASIC OF EACH PAGE IN PAGE.CONTROL.
-    I MADE WORK WITH CONTROLS BECOUSE PAGE.VIEW STILL HAVE TO MAKE SOME
-    INTERNAL CHAGES TO SHOW NAV_DRAWER CORRECTLY, ONLY PERPOUSE
-    OF THIS CODE IS BUILD ONE CONTAINER BOX WITH ALL ANIMATION PRELOADED
-    AND MAY WORK WITH ANIMATION BETWEN SCREENS
+    WRAPED BOX CONTAINER THAT CONTENT EACH SELECTED SCREEN
+    HAVE INSIDE EFFECTS BY DEFOULD
 
+    :ATTRIBUTES:
+
+    animate
+    animate_offset
+    animate_opacity
+    animate_rotation
+    animate_scale
+    offset
+    rotate
+    scale
     """
 
     def __init__(self,
-                 page,
-                 visible: bool = True,
+                 page: object = object(),
                  alignment: object = ft.alignment.center,
                  bgcolor: str = "Transparent",
-                 session_id: str = "",
-                 width: int = 0,
+                 content: object = object(),
                  height: int = 0,
                  padding: tuple = (0, 0, 0, 0),
                  pos_hint: tuple = (0, 0),
-                 content: object = object(),
+                 session_id: str = "",
+                 visible: bool = True,
+                 width: int = 0,
                  ):
-        super().__init__()
+        # super().__init__()
+
         # MAIN PAGE
         self.page = page
 
@@ -76,12 +82,6 @@ class screen_view(ft.Container):
         # )
 
         self.content_widget = content
-        # self.on_hover=lambda _:self.session_id_now(main_id=self.session_id)
 
     def build(self):
         self.content = self.content_widget
-
-    def session_id_now(self, main_id):
-        print(f"[]>>> ID : {main_id}")
-        GLOBAL_VAR(set_global_var={main_id: self.content})
-        GLOBAL_VAR(set_global_var={'current_session': main_id})
