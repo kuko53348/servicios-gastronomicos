@@ -1,4 +1,4 @@
-name: APK Build
+name: APK Build ANDROID
 
 on:
   # Runs on push to any of the below branches
@@ -54,7 +54,7 @@ jobs:
     - name: Flet Build APK
       run: |
         flutter config --no-analytics # disable flutter analytics
-        flet build apk --verbose    # adapt the command to your needs - https://flet.dev/docs/publish 
+        flet build apk --verbose --splash-dark-color=#333333 --build-number=$BUILD_NUMBER --build-version=$BUILD_VERSION # adapt the command to your needs - https://flet.dev/docs/publish
 
     - name: Upload APK Artifact
       uses: actions/upload-artifact@v4.3.4  # https://github.com/marketplace/actions/upload-a-build-artifact
