@@ -32,6 +32,8 @@ def main(page: ft.Page):
             ft.View(
                 padding=0,
                 route="/",
+                horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                vertical_alignment=ft.MainAxisAlignment.CENTER,
                 appbar=nav_app_bar(main_page=page),
                 drawer=nav_drawer_widget(main_page=page),
                 navigation_bar=botton_bar(main_page=page),
