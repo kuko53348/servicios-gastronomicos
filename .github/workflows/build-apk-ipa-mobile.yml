@@ -37,7 +37,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Setup Python ${{ env.PYTHON_VERSION }}
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v2
       with:
         python-version: ${{ env.PYTHON_VERSION }}
 
@@ -51,12 +51,6 @@ jobs:
       with:
         flutter-version: ${{ env.FLUTTER_VERSION }}
 
-    - name: Setup Java JDK
-      uses: actions/setup-java@v4.2.1
-      with:
-        distribution: 'temurin' # See https://github.com/marketplace/actions/setup-java-jdk#supported-distributions for available options
-        java-version: '21'
-
     - name: Flet Build Web
       run: |
             echo "GITHUB_REPOSITORY: ${GITHUB_REPOSITORY}, USER: ${GITHUB_REPOSITORY%/*}, PROJECT_BASE_URL: ${GITHUB_REPOSITORY#*/}"
@@ -64,7 +58,7 @@ jobs:
             flet build web --base-url ${GITHUB_REPOSITORY#*/} --route-url-strategy hash
 
     - name: Upload Artifact
-      uses: actions/upload-pages-artifact@v4.3.4
+      uses: actions/upload-pages-artifact@v3
       with:
         name: web-build-artifact  # the name of the artifact
         path: build/web
@@ -91,6 +85,6 @@ jobs:
       - name: Deploy to GitHub Pages 🚀
         if: github.event_name == 'push'  # deploy only on push
         id: deployment
-        uses: actions/deploy-pages@v4.3.4
+        uses: actions/deploy-pages@v4.0.5
         with:
           artifact_name: web-build-artifact
